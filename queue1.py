@@ -28,6 +28,7 @@ class Queue:
             new=Node(value)
             self.tail.next=new
             self.tail=new
+        self.length+=1
     def pop(self):
         if self.head  is None:
             return None
@@ -35,11 +36,20 @@ class Queue:
             poppedNode=self.head
             self.head=self.head.next
             poppedNode.next=None
-
+    def peek(self):
+        if self.head is None:
+            return None
+        else:
+            return self.tail.value
+    def isempty(self):
+        return self.head ==None
+    def delete(self):
+        node=self.head
+        self.head=None
+        node.next=None
 
 queue=Queue()
 queue.push(5)
 queue.push(15)
-queue.pop()
-queue.pop()
-print(queue)
+print(queue.isempty())
+print(queue.delete())
