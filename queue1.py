@@ -1,55 +1,72 @@
 class Node:
-    def __init__(self,value):
-        self.value=value
-        self.next=None
+    def __init__(self, value=None):
+        self.value = value
+        self.next = None
+
+    def __str__(self):
+        return str(self.value)
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def __iter__(self):
+        cur = self.head
+        while cur:
+            yield cur
+            cur = cur.next
+
 class Queue:
     def __init__(self):
-        self.head=None
-        self.tail=None
-       
-        self.length=0
-    
+        self.linkedList = LinkedList()
+
     def __str__(self):
-        temp=self.head
-        res=""
-        while temp is not None:
-            res+= str(temp.value)
-            temp=temp.next
-            if temp is not None:
-                res +="<-"
-        return res
-    def push(self,value):
-        if self.head is None:
-            new=Node(value)
-            self.head=new
-            self.tail=new
+        value = [str(x) for x in self.linkedList]
+        return " ".join(value)
 
+    def enqueue(self, value):
+        new = Node(value)
+        if self.linkedList.head is None:
+            self.linkedList.head = new
+            self.linkedList.tail = new
         else:
-            new=Node(value)
-            self.tail.next=new
-            self.tail=new
-        self.length+=1
-    def pop(self):
-        if self.head  is None:
+            self.linkedList.tail.next = new
+            self.linkedList.tail = new
+
+    def dequeue(self):
+        if self.linkedList.head is None:
             return None
         else:
-            poppedNode=self.head
-            self.head=self.head.next
-            poppedNode.next=None
+            poppedNode = self.linkedList.head
+            if self.linkedList.head == self.linkedList.tail:
+                self.linkedList.head = None
+                self.linkedList.tail = None
+            else:
+                self.linkedList.head = self.linkedList.head.next
+            poppedNode.next = None
+            return poppedNode.value
+
     def peek(self):
-        if self.head is None:
+        if self.linkedList.head is None:
             return None
         else:
-            return self.tail.value
-    def isempty(self):
-        return self.head ==None
-    def delete(self):
-        node=self.head
-        self.head=None
-        node.next=None
+            return self.linkedList.head.value
 
-queue=Queue()
-queue.push(5)
-queue.push(15)
-print(queue.isempty())
-print(queue.delete())
+    def isempty(self):
+        
+            
+        return  self.linkedList.head == None
+
+    def delete(self):
+        self.linkedList.head = None
+        self.linkedList.tail = None
+
+queue = Queue()
+queue.enqueue(1)
+queue.enqueue(2)
+queue.enqueue(3)
+queue.dequeue()
+queue.dequeue()
+queue.dequeue()
+
