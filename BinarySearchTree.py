@@ -1,5 +1,5 @@
 
-import Levelorder as levelorder
+import TreeTraversal as TreeTraversal
 class BSTreeNode:
     def __init__(self,data):
         self.data=data
@@ -69,5 +69,5 @@ def Deleteall(rootNode):
 # insert(bst,20)
 # insert(bst,40)
 # Delete(bst,71)
-# levelorder.levelOrder(bst) 
+# TreeTraversal.levelOrder(bst) 
 
